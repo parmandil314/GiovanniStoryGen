@@ -1,0 +1,45 @@
+{
+  "Name": "Hella",
+  "Location": "Spain",
+  "Goal": "None",
+  "Self-Hatred": 1,
+  "Traits": [
+    "Straight",
+    "WGR",
+    "WNTL"
+  ],
+  "Relationships": [
+    {
+      "met": true,
+      "name": "David",
+      "relationship": "OL",
+      "romantic love": [10,8],
+      "sexual interest": [8,8],
+      "platonic love": [10,9]
+    },
+    {
+      "met": false,
+      "name": "Guillaume",
+      "relationship": "A",
+      "romantic love": [1,1],
+      "sexual interest": [1,1],
+      "platonic love": [3,3]
+    },
+    {
+      "met": false,
+      "name": "Jacques",
+      "relationship": "A",
+      "romantic love": [1,1],
+      "sexual interest": [1,1],
+      "platonic love": [3,3]
+    },
+    {
+      "met": false,
+      "name": "Giovanni",
+      "relationship": "A",
+      "romantic love": [1,1],
+      "sexual interest": [1,1],
+      "platonic love": [4,4]
+    }
+  ]
+}

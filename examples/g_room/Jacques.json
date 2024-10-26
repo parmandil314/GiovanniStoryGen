@@ -1,0 +1,45 @@
+{
+  "Name": "Jacques",
+  "Location": "Paris",
+  "Goal": "None",
+  "Self-Hatred": 4,
+  "Traits": [
+    "Gay",
+    "LYP",
+    "LIS"
+  ],
+  "Relationships": [
+    {
+      "met": false,
+      "name": "Guillaume",
+      "relationship": "A",
+      "romantic love": [1,1],
+      "sexual interest": [1,1],
+      "platonic love": [6,5]
+    },
+    {
+      "met": true,
+      "name": "David",
+      "relationship": "A",
+      "romantic love": [2,3],
+      "sexual interest": [2,4],
+      "platonic love": [5,5]
+    },
+    {
+      "met": false,
+      "name": "Hella",
+      "relationship": "A",
+      "romantic love": [1,1],
+      "sexual interest": [1,1],
+      "platonic love": [4,4]
+    },
+    {
+      "met": false,
+      "name": "Giovanni",
+      "relationship": "A",
+      "romantic love": [2,3],
+      "sexual interest": [2,4],
+      "platonic love": [4,4]
+    }
+  ]
+}
