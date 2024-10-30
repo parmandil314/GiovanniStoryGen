@@ -1,4 +1,6 @@
-# Trait acronym mappings:
+# Traits:
+#    Gay: Gay man
+#    Lesbian: Lesbian woman
 #    LIT: Love Is Transactional
 #    LYP: Loves Younger People
 #    LINT: Love Is Not Transactional
@@ -11,7 +13,6 @@
 # Relationship acronym mappings:
 #    OL: Official Lover
 #    PL: Private Lover
-#    Relationship acronym mappings:
 #    SAP: Sexually Abusive (Perpetrator)
 #    SAV: Sexually Abusive (Victim)
 #    A: Associate (friendly, but not friends exactly)
@@ -19,18 +20,31 @@
 import json
 import os
 
+VALID_TRAITS = ("LIT", "LYP", "LINT", "WGR", "CD", "NAI", "WNTL", "RAP", "WPC")
+VALID_RELATIONS = ("OL", "PL", "SAP", "SAV", "A")
+
 def load_directory(path):
-    files = os.listdir(path)
+    try:
+        files = os.listdir(path)
+    except FileNotFoundError:
+        print("Invalid directory path specified.")
+        return []
     characters = []
     for i in files:
-        if i[:-5] == ".json":
+        if not path[-1] == "/":
+            characters.append(load_json_character(path + "/" + i))
+        else:
             characters.append(load_json_character(path + i))
     return characters
 
+
 def load_json_character(filename):
-    with open(filename, "r") as file:
-        json_string = file.read()
-        file.close()
+    try:
+        with open(filename, "r") as file:
+            json_string = file.read()
+            file.close()
+    except FileNotFoundError:
+        return None
     json_contents = json.loads(json_string)
     name = json_contents["Name"]
     location = json_contents["Location"]
@@ -39,6 +53,7 @@ def load_json_character(filename):
     traits = json_contents["Traits"]
     relationships = json_contents["Relationships"]
     return Character(name, location, goal, self_hatred, traits, relationships)
+
 
 class Character:
     def __init__(self, name, location, goal, self_hatred, traits, relationships):

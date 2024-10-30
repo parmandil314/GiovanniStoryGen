@@ -1,6 +1,6 @@
 {
   "Name": "Hella",
-  "Location": "Spain",
+  "Location": ["Spain"],
   "Goal": "None",
   "Self-Hatred": 1,
   "Traits": [
@@ -8,38 +8,38 @@
     "WGR",
     "WNTL"
   ],
-  "Relationships": [
-    {
+  "Relationships": {
+    "David": {
       "met": true,
       "name": "David",
-      "relationship": "OL",
+      "relationship": ["OL"],
       "romantic love": [10,8],
       "sexual interest": [8,8],
       "platonic love": [10,9]
     },
-    {
+    "Guillaume": {
       "met": false,
       "name": "Guillaume",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [1,1],
       "sexual interest": [1,1],
       "platonic love": [3,3]
     },
-    {
+    "Jacques": {
       "met": false,
       "name": "Jacques",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [1,1],
       "sexual interest": [1,1],
       "platonic love": [3,3]
     },
-    {
+    "Giovanni": {
       "met": false,
       "name": "Giovanni",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [1,1],
       "sexual interest": [1,1],
       "platonic love": [4,4]
     }
-  ]
+  }
 }

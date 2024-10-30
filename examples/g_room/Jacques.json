@@ -1,6 +1,6 @@
 {
   "Name": "Jacques",
-  "Location": "Paris",
+  "Location": ["Paris"],
   "Goal": "None",
   "Self-Hatred": 4,
   "Traits": [
@@ -8,38 +8,38 @@
     "LYP",
     "LIS"
   ],
-  "Relationships": [
-    {
+  "Relationships": {
+    "Guillaume": {
       "met": false,
       "name": "Guillaume",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [1,1],
       "sexual interest": [1,1],
       "platonic love": [6,5]
     },
-    {
+    "David": {
       "met": true,
       "name": "David",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [2,3],
       "sexual interest": [2,4],
       "platonic love": [5,5]
     },
-    {
+    "Hella": {
       "met": false,
       "name": "Hella",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [1,1],
       "sexual interest": [1,1],
       "platonic love": [4,4]
     },
-    {
+    "Giovanni": {
       "met": false,
       "name": "Giovanni",
-      "relationship": "A",
+      "relationship": ["A"],
       "romantic love": [2,3],
       "sexual interest": [2,4],
       "platonic love": [4,4]
     }
-  ]
+  }
 }

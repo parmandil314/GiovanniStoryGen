@@ -1,6 +1,6 @@
 {
   "Name": "Giovanni",
-  "Location": "Paris",
+  "Location": ["Paris"],
   "Goal": "None",
   "Self-Hatred": 3,
   "Traits": [
@@ -10,38 +10,74 @@
     "CD",
     "NAI"
   ],
-  "Relationships": [
-    {
-      "met": true,
-      "name": "Guillaume",
-      "relationship": "SAV",
-      "romantic love": [3,1],
-      "sexual interest": [1,1],
-      "platonic love": [3,1]
-    },
-    {
-      "met": false,
-      "name": "David",
-      "relationship": "PL",
-      "romantic love": [3,7],
-      "sexual interest": [2,7],
-      "platonic love": [6,7]
-    },
-    {
-      "met": false,
-      "name": "Jacques",
-      "relationship": "A",
-      "romantic love": [3,1],
-      "sexual interest": [1,1],
-      "platonic love": [3,2]
-    },
-    {
-      "met": false,
-      "name": "Hella",
-      "relationship": "A",
-      "romantic love": [1,1],
-      "sexual interest": [1,1],
-      "platonic love": [4,4]
-    }
-  ]
+  "Relationships": {
+  "Guillaume": {
+    "met": true,
+    "name": "Guillaume",
+    "relationship": ["ESAV"],
+    "romantic love": [
+      3,
+      1
+    ],
+    "sexual interest": [
+      1,
+      1
+    ],
+    "platonic love": [
+      3,
+      1
+    ]
+  },
+  "David": {
+    "met": false,
+    "name": "David",
+    "relationship": ["PL"],
+    "romantic love": [
+      3,
+      7
+    ],
+    "sexual interest": [
+      2,
+      7
+    ],
+    "platonic love": [
+      6,
+      7
+    ]
+  },
+  "Jacques": {
+    "met": false,
+    "name": "Jacques",
+    "relationship": ["A"],
+    "romantic love": [
+      3,
+      1
+    ],
+    "sexual interest": [
+      1,
+      1
+    ],
+    "platonic love": [
+      3,
+      2
+    ]
+  },
+  "Hella": {
+    "met": false,
+    "name": "Hella",
+    "relationship": ["A"],
+    "romantic love": [
+      1,
+      1
+    ],
+    "sexual interest": [
+      1,
+      1
+    ],
+    "platonic love": [
+      3,
+      3
+    ]
+  }
+}
 }
