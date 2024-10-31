@@ -1,0 +1,1 @@
+cxfreeze --script src/main.py --target-dir bin
