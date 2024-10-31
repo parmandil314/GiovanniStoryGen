@@ -1,3 +1,3 @@
-import storygen
+from storygen import story
 
-storygen.run_repl()
+story.run_repl()

@@ -1,6 +1,75 @@
 import pickle
 
-import character as char
+# Traits:
+#    LIT: Love Is Transactional
+#    LYP: Loves Younger People
+#    LINT: Love Is Not Transactional
+#    WGR: Wants a Good Relationship
+#    CD: Cares about Dignity
+#    NAI: Not Afraid of their Identity
+#    WNTL: Wants Non-Transactional Love
+#    RAP: Runs Away from Problems
+#    WPC: Wants to Prove Conventionality
+# Relationship acronym mappings:
+#    EPL: Ex-Private Lover
+#    EOL: Ex-Official Lover
+#    OL: Official Lover
+#    PL: Private Lover
+#    SAP: Sexually Abusive (Perpetrator)
+#    SAV: Sexually Abusive (Victim)
+#    A: Associate (friendly, but not friends exactly)
+
+import json
+import os
+
+VALID_TRAITS = ("LIT", "LYP", "LINT", "WGR", "CD", "NAI", "WNTL", "RAP", "WPC")
+VALID_RELATIONS = ("OL", "PL", "SAP", "SAV", "A", "EOL", "EPL", "ESAP", "ESAV")
+
+def load_directory(path):
+    try:
+        files = os.listdir(path)
+    except FileNotFoundError:
+        print("Invalid directory path specified.")
+        return []
+    characters = []
+    for i in files:
+        if not path[-1] == "/":
+            characters.append(load_json_character(path + "/" + i))
+        else:
+            characters.append(load_json_character(path + i))
+    return characters
+
+
+def load_json_character(filename):
+    try:
+        with open(filename, "r") as file:
+            json_string = file.read()
+            file.close()
+    except FileNotFoundError:
+        return None
+    json_contents = json.loads(json_string)
+    name = json_contents["Name"]
+    location = json_contents["Location"]
+    goal = json_contents["Goal"]
+    self_hatred = json_contents["Self-Hatred"]
+    traits = json_contents["Traits"]
+    relationships = json_contents["Relationships"]
+    is_alive = json_contents["Alive"]
+    is_available = json_contents["Available"]
+    return Character(name, location, goal, self_hatred, traits, relationships, is_alive, is_available)
+
+
+class Character:
+    def __init__(self, name, location, goal, self_hatred, traits, relationships, is_alive, is_available):
+        self.name = name
+        self.location = location
+        self.goal = goal
+        self.hatred = self_hatred
+        self.traits = traits
+        self.relations = relationships
+        self.alive = is_alive
+        self.available = is_available
+
 
 def run_repl():
     print("Welcome to the Giovanni's Room Story Generator!")
@@ -26,7 +95,6 @@ def run_repl():
                 final = input("This command will exit the program.\nUnsaved data will be lost!\nAre you sure you want to do this? (y/n): ")
                 if final.lower() == "y":
                     print("Exiting the REPL")
-                    exit(0)
                 else:
                     inp = ""
             case "save":
@@ -39,7 +107,7 @@ def run_repl():
                     file.close()
             case "load-chars":
                 try:
-                    story = Story(char.load_directory(command[1]))
+                    story = Story(load_directory(command[1]))
                 except IndexError:
                     print("Invalid command syntax.")
             case "round":
@@ -111,11 +179,11 @@ class Story:
             character.relations[relation_name]["platonic love"][0] += pl[0]
             character.relations[relation_name]["platonic love"][1] += pl[1]
 
-            if not relation_type is None and relation_type in char.VALID_RELATIONS:
+            if not relation_type is None and relation_type in VALID_RELATIONS:
                 character.relations[relation_name]["relationship"].append(relation_type)
 
             print(f" | {name}'s love for {relation_name} has been modified:")
-            if not relation_type is None and relation_type in char.VALID_RELATIONS:
+            if not relation_type is None and relation_type in VALID_RELATIONS:
                 print(f" |  relationship type: {relation_type}")
             else:
                 print(f" |  relationship type: {character.relations[relation_name]["relationship"][-1]} (no change)")
@@ -171,12 +239,12 @@ class Story:
             character.relations[relation_name]["sexual interest"] = list(si)
             character.relations[relation_name]["platonic love"] = list(pl)
 
-            if not relation_type is None and relation_type in char.VALID_RELATIONS:
+            if not relation_type is None and relation_type in VALID_RELATIONS:
                 character.relations[relation_name]["relationship"][-1] = relation_type
 
             print(f" | {name}'s love for {relation_name} has been modified:")
 
-            if not relation_type is None and relation_type in char.VALID_RELATIONS:
+            if not relation_type is None and relation_type in VALID_RELATIONS:
                 print(f" | relationship type: {relation_type}")
             else:
                 print(f" | relationship type: {character.relations[relation_name]["relationship"][-1]} (no change)")

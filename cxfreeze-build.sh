@@ -1,1 +1,1 @@
-cxfreeze --script src/main.py --target-dir bin
+python3 src/setup.py build
