@@ -3,6 +3,8 @@
   "Location": ["Spain"],
   "Goal": "None",
   "Self-Hatred": 1,
+  "Alive": true,
+  "Available": true,
   "Traits": [
     "Straight",
     "WGR",
@@ -16,14 +18,6 @@
       "romantic love": [10,8],
       "sexual interest": [8,8],
       "platonic love": [10,9]
-    },
-    "Guillaume": {
-      "met": false,
-      "name": "Guillaume",
-      "relationship": ["A"],
-      "romantic love": [1,1],
-      "sexual interest": [1,1],
-      "platonic love": [3,3]
     },
     "Jacques": {
       "met": false,

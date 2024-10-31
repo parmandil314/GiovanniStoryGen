@@ -9,6 +9,8 @@
 #    RAP: Runs Away from Problems
 #    WPC: Wants to Prove Conventionality
 # Relationship acronym mappings:
+#    EPL: Ex-Private Lover
+#    EOL: Ex-Official Lover
 #    OL: Official Lover
 #    PL: Private Lover
 #    SAP: Sexually Abusive (Perpetrator)
@@ -19,7 +21,7 @@ import json
 import os
 
 VALID_TRAITS = ("LIT", "LYP", "LINT", "WGR", "CD", "NAI", "WNTL", "RAP", "WPC")
-VALID_RELATIONS = ("OL", "PL", "SAP", "SAV", "A")
+VALID_RELATIONS = ("OL", "PL", "SAP", "SAV", "A", "EOL", "EPL", "ESAP", "ESAV")
 
 def load_directory(path):
     try:
@@ -50,14 +52,18 @@ def load_json_character(filename):
     self_hatred = json_contents["Self-Hatred"]
     traits = json_contents["Traits"]
     relationships = json_contents["Relationships"]
-    return Character(name, location, goal, self_hatred, traits, relationships)
+    is_alive = json_contents["Alive"]
+    is_available = json_contents["Available"]
+    return Character(name, location, goal, self_hatred, traits, relationships, is_alive, is_available)
 
 
 class Character:
-    def __init__(self, name, location, goal, self_hatred, traits, relationships):
+    def __init__(self, name, location, goal, self_hatred, traits, relationships, is_alive, is_available):
         self.name = name
         self.location = location
         self.goal = goal
         self.hatred = self_hatred
         self.traits = traits
         self.relations = relationships
+        self.alive = is_alive
+        self.available = is_available

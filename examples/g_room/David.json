@@ -3,6 +3,8 @@
   "Location": ["Paris"],
   "Goal": "None",
   "Self-Hatred": 5,
+  "Alive": true,
+  "Available": true,
   "Traits": [
     "RAP",
     "LIT",
