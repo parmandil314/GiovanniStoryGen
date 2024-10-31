@@ -27,6 +27,8 @@ def run_repl():
                 if final.lower() == "y":
                     print("Exiting the REPL")
                     exit(0)
+                else:
+                    inp = ""
             case "save":
                 with open(command[1], "wb") as file:
                     pickle.dump(story, file)
@@ -45,6 +47,8 @@ def run_repl():
             case "rounds":
                 for _ in range(int(command[1])):
                     story.tick()
+            case "inspect":
+                story.print_char(command[1])
             case _:
                 print("Invalid command.")
 
@@ -52,6 +56,30 @@ def check(lis):
     return all(i == lis[0] for i in lis)
 
 class Story:
+    def print_char(self, name):
+        character = self.find_char(name)
+        print(f"Name: {character.name}")
+        print(f"Location: {character.location[-1]}")
+        if not character.goal == "" and not character.goal == "None":
+            print(f"Goal: {character.goal}")
+        else:
+            print("Goal: None")
+        print(f"Self-Hatred: {character.hatred}/10")
+        print("Traits:")
+        for i in character.traits:
+            print(f"\t{i}")
+        print("Relationships:")
+        for i in character.relations.keys():
+            print(f"\tName: {i}")
+            print(f"\t\tHas met: {character.relations[i]["met"]}")
+            print(f"\t\tRelationship Type: {character.relations[i]["relationship"]}")
+            print(f"\t\tExternal Romantic Love: {character.relations[i]["romantic love"][0]}/10")
+            print(f"\t\tInternal Romantic Love: {character.relations[i]["romantic love"][1]}/10")
+            print(f"\t\tExternal Sexual Interest: {character.relations[i]["sexual interest"][0]}/10")
+            print(f"\t\tInternal Sexual Interest: {character.relations[i]["sexual interest"][1]}/10")
+            print(f"\t\tExternal Platonic Love: {character.relations[i]["platonic love"][0]}/10")
+            print(f"\t\tInternal Platonic Love: {character.relations[i]["platonic love"][1]}/10")
+
     def set_names(self):
         self.names = []
         for character in self.characters:
@@ -293,9 +321,9 @@ class Story:
     def change_self_hatred(self, name, hatred):
         self.find_char(name).hatred += hatred
         if hatred > 0:
-            print(f" | {name}'s self-hatred has been increased to {self.find_char(name).hatred}!")
+            print(f" | {name}'s self-hatred has increased to {self.find_char(name).hatred}!")
         elif hatred < 0:
-            print(f" | {name}'s self-hatred has been decreased to {self.find_char(name).hatred}!")
+            print(f" | {name}'s self-hatred has decreased to {self.find_char(name).hatred}!")
 
     def make_or_break(self):
         return_val = "m_or_b"
@@ -416,7 +444,6 @@ class Story:
         for i in self.characters:
             prev_7_locs = i.location[-7:]
             same = check(prev_7_locs)
-
             if same is True and self.in_ol(i.name) and not self.in_pl(i.name):
                 new_location = self.find_char(self.find_ol(i.name)).location[-1]
                 print(f" | {i.name} is moving to {new_location}.")
@@ -455,6 +482,8 @@ class Story:
                 if self.has_met(ol, pl) or self.has_met(pl, ol):
                     triggered = True
                     return_val = return_val + " " + ol + " " + pl
+                    print(f"Since {ol} has encountered {pl}, {i.name}'s stress and inner turmoil is growing.")
+                    self.change_self_hatred(i.name, 1)
         if triggered:
             self.prev_action = return_val
             return return_val
@@ -499,6 +528,9 @@ class Story:
             self.log.append(self.prev_action)
             return
         if not self.update_locs() == "":
+            self.log.append(self.prev_action)
+            return
+        if not self.ol_pl_meet() == "":
             self.log.append(self.prev_action)
             return
         print(" | Nothing significant happens this round.")

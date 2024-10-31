@@ -1,6 +1,4 @@
 # Traits:
-#    Gay: Gay man
-#    Lesbian: Lesbian woman
 #    LIT: Love Is Transactional
 #    LYP: Loves Younger People
 #    LINT: Love Is Not Transactional
