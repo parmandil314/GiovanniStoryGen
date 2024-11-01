@@ -357,7 +357,6 @@ class Story:
             return return_val
         return ""
 
-
     def sleep(self):
         prev = self.prev_action.split()
         return_val = "sleep "
@@ -376,14 +375,14 @@ class Story:
                     print(f" | {i[0]} and {i[1]} sleep with each other.")
                     return_val = return_val + i[0] + " " + i[1] + " "
                     if "LINT" in self.find_char(i[0]).traits:
-                        self.modify_relation(i[0], i[1], (0, 1), (0, 1), (2, 1))
+                        self.modify_relation(i[0], i[1], rl=(0, 1), si=(0, 1), pl=(2, 1))
                     else:
-                        self.modify_relation(i[0], i[1], (0,-1), (0,-1), (0,-1))
+                        self.modify_relation(i[0], i[1], rl=(0,-1), si=(0,-1), pl=(0,-1))
 
                     if "LINT" in self.find_char(i[1]).traits:
-                        self.modify_relation(i[1], i[0], (0, 1), (0, 1), (2, 1))
+                        self.modify_relation(i[1], i[0], rl=(0, 1), si=(0, 1), pl=(2, 1))
                     else:
-                        self.modify_relation(i[1], i[0], (0,-1), (0,-1), (0,-1))
+                        self.modify_relation(i[1], i[0], rl=(0,-1), si=(0,-1), pl=(0,-1))
 
         if has_happened:
             self.prev_action = return_val
