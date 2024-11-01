@@ -73,8 +73,7 @@ class Character:
 
 def run_repl():
     print("Welcome to the Giovanni's Room Story Generator!")
-    print("For a detailed description of character creation,")
-    print("as well as a complete program specification, ")
+    print("For a complete program specification, ")
     print("view README.md in the project root directory.")
     print("To learn how to navigate this interface, input 'help'")
     print("or look at the README.")
@@ -728,7 +727,7 @@ class Story:
         return ""
 
     def execute(self, name):
-        print(f" | {name} is executed after a time spent on death row!")
+        print(f" | {name} is executed after spending time on death row!")
         self.die(name)
 
     def executions(self):
