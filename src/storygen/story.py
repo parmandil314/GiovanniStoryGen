@@ -2,14 +2,8 @@ import pickle
 
 # Traits:
 #    LIT: Love Is Transactional
-#    LYP: Loves Younger People
 #    LINT: Love Is Not Transactional
-#    WGR: Wants a Good Relationship
-#    CD: Cares about Dignity
-#    NAI: Not Afraid of their Identity
-#    WNTL: Wants Non-Transactional Love
-#    RAP: Runs Away from Problems
-#    WPC: Wants to Prove Conventionality
+#    Straight
 # Relationship acronym mappings:
 #    EPL: Ex-Private Lover
 #    EOL: Ex-Official Lover
@@ -17,7 +11,6 @@ import pickle
 #    PL: Private Lover
 #    SAP: Sexually Abusive (Perpetrator)
 #    SAV: Sexually Abusive (Victim)
-#    A: Associate (friendly, but not friends exactly)
 
 import json
 import os
@@ -496,9 +489,9 @@ class Story:
         char2 = self.find_char(names[1])
         if char1.alive and char1.available and char2.alive and char2.available:
             try:
-                for i in char1.relations[char2.name]["relationship"][-rounds:]:
-                    if i == relation:
-                        return True
+                check(char1.relations[char2.name]["relationship"][-rounds:])
+                if char1.relations[char2.name]["relationship"][-1] == relation:
+                    return True
             except KeyError:
                 return False
         return False
