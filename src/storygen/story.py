@@ -2,14 +2,8 @@ import pickle
 
 # Traits:
 #    LIT: Love Is Transactional
-#    LYP: Loves Younger People
 #    LINT: Love Is Not Transactional
-#    WGR: Wants a Good Relationship
-#    CD: Cares about Dignity
-#    NAI: Not Afraid of their Identity
-#    WNTL: Wants Non-Transactional Love
-#    RAP: Runs Away from Problems
-#    WPC: Wants to Prove Conventionality
+#    Straight
 # Relationship acronym mappings:
 #    EPL: Ex-Private Lover
 #    EOL: Ex-Official Lover
@@ -17,7 +11,6 @@ import pickle
 #    PL: Private Lover
 #    SAP: Sexually Abusive (Perpetrator)
 #    SAV: Sexually Abusive (Victim)
-#    A: Associate (friendly, but not friends exactly)
 
 import json
 import os
@@ -73,8 +66,7 @@ class Character:
 
 def run_repl():
     print("Welcome to the Giovanni's Room Story Generator!")
-    print("For a detailed description of character creation,")
-    print("as well as a complete program specification, ")
+    print("For a complete program specification, ")
     print("view README.md in the project root directory.")
     print("To learn how to navigate this interface, input 'help'")
     print("or look at the README.")
@@ -357,7 +349,6 @@ class Story:
             return return_val
         return ""
 
-
     def sleep(self):
         prev = self.prev_action.split()
         return_val = "sleep "
@@ -376,14 +367,14 @@ class Story:
                     print(f" | {i[0]} and {i[1]} sleep with each other.")
                     return_val = return_val + i[0] + " " + i[1] + " "
                     if "LINT" in self.find_char(i[0]).traits:
-                        self.modify_relation(i[0], i[1], (0, 1), (0, 1), (2, 1))
+                        self.modify_relation(i[0], i[1], rl=(0, 1), si=(0, 1), pl=(2, 1))
                     else:
-                        self.modify_relation(i[0], i[1], (0,-1), (0,-1), (0,-1))
+                        self.modify_relation(i[0], i[1], rl=(0,-1), si=(0,-1), pl=(0,-1))
 
                     if "LINT" in self.find_char(i[1]).traits:
-                        self.modify_relation(i[1], i[0], (0, 1), (0, 1), (2, 1))
+                        self.modify_relation(i[1], i[0], rl=(0, 1), si=(0, 1), pl=(2, 1))
                     else:
-                        self.modify_relation(i[1], i[0], (0,-1), (0,-1), (0,-1))
+                        self.modify_relation(i[1], i[0], rl=(0,-1), si=(0,-1), pl=(0,-1))
 
         if has_happened:
             self.prev_action = return_val
@@ -498,9 +489,9 @@ class Story:
         char2 = self.find_char(names[1])
         if char1.alive and char1.available and char2.alive and char2.available:
             try:
-                for i in char1.relations[char2.name]["relationship"][-rounds:]:
-                    if i == relation:
-                        return True
+                check(char1.relations[char2.name]["relationship"][-rounds:])
+                if char1.relations[char2.name]["relationship"][-1] == relation:
+                    return True
             except KeyError:
                 return False
         return False
@@ -517,6 +508,7 @@ class Story:
                         triggered = True
                         return_val = return_val + " " + i.name + " " + j.name
                         print(f" | {j.name} dramatically fires {i.name} from their business!")
+                        self.change_self_hatred(i.name, 2)
                         self.modify_relation(j.name, i.name, "SAP", (-1,-1), (-1,-1), (-1,-1))
                         self.modify_relation(i.name, j.name, "SAV", (-1, -1), (-1, -1), (-1, -1))
         if triggered:
@@ -729,7 +721,7 @@ class Story:
         return ""
 
     def execute(self, name):
-        print(f" | {name} is executed after a time spent on death row!")
+        print(f" | {name} is executed after spending time on death row!")
         self.die(name)
 
     def executions(self):
