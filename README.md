@@ -26,7 +26,7 @@ During each round, a set of rules should be applied one by one to the list of ch
 
 If a rule is triggered, the round ends after the corresponding action resolves. If no rule triggers, the plot should end.
 
-Each rule is a rule of the world of Giovanni's Room, and is meant to be true in any story set in this world. The rules for v1.0.0 are described below.
+Each rule is a rule of the world of Giovanni's Room, and is meant to be true in any story set in this world. The rules for v1.0.1 are described below.
 
 ### Rules (apply in order):
 1. If all the characters in each location who are alive and available have not met each other, but have initial relationship values listed, they meet each other somehow. This applies in all locations; for example, if there were two characters in Spain who hadn't met each other, and three characters in France who hadn't met each other, both groups would meet each other.
