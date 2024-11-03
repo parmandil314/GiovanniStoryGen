@@ -508,6 +508,7 @@ class Story:
                         triggered = True
                         return_val = return_val + " " + i.name + " " + j.name
                         print(f" | {j.name} dramatically fires {i.name} from their business!")
+                        self.change_self_hatred(i.name, 2)
                         self.modify_relation(j.name, i.name, "SAP", (-1,-1), (-1,-1), (-1,-1))
                         self.modify_relation(i.name, j.name, "SAV", (-1, -1), (-1, -1), (-1, -1))
         if triggered:
